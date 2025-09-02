@@ -1,11 +1,21 @@
+'use client';
+
 import React from 'react';
 import Link from 'next/link';
-import { Plus, TrendingUp } from 'lucide-react';
+import { Plus, TrendingUp, Download } from 'lucide-react';
 import SummaryCards from '@/components/Dashboard/SummaryCards';
 import CategoryBreakdown from '@/components/Dashboard/CategoryBreakdown';
 import ExpenseList from '@/components/Expenses/ExpenseList';
+import { useExpenses } from '@/contexts/ExpenseContext';
+import { exportExpensesToCSV } from '@/lib/csvExport';
 
 export default function Home() {
+  const { expenses } = useExpenses();
+  
+  const handleExportCSV = () => {
+    exportExpensesToCSV(expenses);
+  };
+
   return (
     <div className="space-y-8">
       {/* Header */}
@@ -17,13 +27,23 @@ export default function Home() {
           </p>
         </div>
         
-        <Link
-          href="/add"
-          className="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors"
-        >
-          <Plus className="w-4 h-4 mr-2" />
-          Add Expense
-        </Link>
+        <div className="flex gap-3">
+          <button
+            onClick={handleExportCSV}
+            className="inline-flex items-center px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 transition-colors"
+          >
+            <Download className="w-4 h-4 mr-2" />
+            Export Data
+          </button>
+          
+          <Link
+            href="/add"
+            className="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors"
+          >
+            <Plus className="w-4 h-4 mr-2" />
+            Add Expense
+          </Link>
+        </div>
       </div>
 
       {/* Summary Cards */}
