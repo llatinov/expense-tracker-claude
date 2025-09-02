@@ -5,8 +5,9 @@ import { Edit, Trash2, Search, Filter, Download } from 'lucide-react';
 import { useExpenses } from '@/contexts/ExpenseContext';
 import { ExpenseFilters, ExpenseCategory } from '@/types/expense';
 import { EXPENSE_CATEGORIES, CATEGORY_ICONS } from '@/constants/categories';
-import { filterExpenses, formatCurrency, formatDate, downloadCSV } from '@/lib/utils';
+import { filterExpenses, formatCurrency, formatDate } from '@/lib/utils';
 import { cn } from '@/lib/utils';
+import ExportModal from '@/components/Export/ExportModal';
 
 interface ExpenseListProps {
   showFilters?: boolean;
@@ -17,6 +18,7 @@ export default function ExpenseList({ showFilters = true, limit }: ExpenseListPr
   const { expenses, deleteExpense } = useExpenses();
   const [localFilters, setLocalFilters] = useState<ExpenseFilters>({});
   const [searchQuery, setSearchQuery] = useState('');
+  const [isExportModalOpen, setIsExportModalOpen] = useState(false);
 
   const filteredExpenses = useMemo(() => {
     const filters = { ...localFilters, searchQuery };
@@ -39,8 +41,7 @@ export default function ExpenseList({ showFilters = true, limit }: ExpenseListPr
   };
 
   const handleExport = () => {
-    const expensesToExport = limit ? filteredExpenses : expenses;
-    downloadCSV(expensesToExport, `expenses-${new Date().toISOString().split('T')[0]}.csv`);
+    setIsExportModalOpen(true);
   };
 
   return (
@@ -83,7 +84,7 @@ export default function ExpenseList({ showFilters = true, limit }: ExpenseListPr
                 className="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 transition-colors flex items-center gap-2"
               >
                 <Download className="w-4 h-4" />
-                Export
+                Export Data
               </button>
             </div>
           </div>
@@ -195,6 +196,12 @@ export default function ExpenseList({ showFilters = true, limit }: ExpenseListPr
           </div>
         )}
       </div>
+
+      {/* Export Modal */}
+      <ExportModal
+        isOpen={isExportModalOpen}
+        onClose={() => setIsExportModalOpen(false)}
+      />
     </div>
   );
 }
