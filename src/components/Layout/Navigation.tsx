@@ -3,7 +3,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Home, Plus, List, BarChart3 } from 'lucide-react';
+import { Home, Plus, List, Brain } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 const navItems = [
@@ -14,7 +14,7 @@ const navItems = [
   },
   {
     href: '/add',
-    label: 'Add Expense',
+    label: 'Smart Add',
     icon: Plus,
   },
   {
@@ -24,8 +24,8 @@ const navItems = [
   },
   {
     href: '/analytics',
-    label: 'Analytics',
-    icon: BarChart3,
+    label: 'AI Insights',
+    icon: Brain,
   },
 ];
 
@@ -38,10 +38,10 @@ export default function Navigation() {
         <div className="flex justify-between h-16">
           <div className="flex items-center">
             <div className="flex-shrink-0 flex items-center">
-              <div className="h-8 w-8 bg-blue-600 rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-lg">$</span>
+              <div className="h-8 w-8 bg-gradient-to-r from-purple-600 to-blue-600 rounded-lg flex items-center justify-center">
+                <Brain className="h-5 w-5 text-white" />
               </div>
-              <span className="ml-2 text-xl font-bold text-gray-900">ExpenseTracker</span>
+              <span className="ml-2 text-xl font-bold text-gray-900">AI ExpenseTracker</span>
             </div>
           </div>
 
@@ -57,7 +57,7 @@ export default function Navigation() {
                   className={cn(
                     'inline-flex items-center px-3 py-2 rounded-md text-sm font-medium transition-colors',
                     isActive
-                      ? 'bg-blue-100 text-blue-700'
+                      ? 'bg-purple-100 text-purple-700'
                       : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
                   )}
                 >
@@ -84,7 +84,7 @@ export default function Navigation() {
                 className={cn(
                   'flex-1 flex flex-col items-center py-3 px-2 text-xs font-medium transition-colors',
                   isActive
-                    ? 'bg-blue-100 text-blue-700'
+                    ? 'bg-purple-100 text-purple-700'
                     : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
                 )}
               >

@@ -1,9 +1,10 @@
 import React from 'react';
 import Link from 'next/link';
-import { Plus, TrendingUp } from 'lucide-react';
+import { Plus, TrendingUp, Brain } from 'lucide-react';
 import SummaryCards from '@/components/Dashboard/SummaryCards';
 import CategoryBreakdown from '@/components/Dashboard/CategoryBreakdown';
 import ExpenseList from '@/components/Expenses/ExpenseList';
+import PredictiveInsights from '@/components/AI/PredictiveInsights';
 
 export default function Home() {
   return (
@@ -13,7 +14,7 @@ export default function Home() {
         <div>
           <h1 className="text-3xl font-bold text-gray-900">Dashboard</h1>
           <p className="text-gray-600 mt-1">
-            Welcome back! Here's an overview of your expenses.
+            Welcome back! Here&apos;s an overview of your expenses.
           </p>
         </div>
         
@@ -28,6 +29,9 @@ export default function Home() {
 
       {/* Summary Cards */}
       <SummaryCards />
+
+      {/* AI Predictive Insights */}
+      <PredictiveInsights />
 
       {/* Main Content Grid */}
       <div className="grid lg:grid-cols-3 gap-8">
@@ -76,10 +80,10 @@ export default function Home() {
             href="/analytics"
             className="flex items-center p-4 bg-purple-50 rounded-lg hover:bg-purple-100 transition-colors"
           >
-            <TrendingUp className="w-8 h-8 text-purple-600 mr-3" />
+            <Brain className="w-8 h-8 text-purple-600 mr-3" />
             <div>
-              <div className="font-medium text-gray-900">Analytics</div>
-              <div className="text-sm text-gray-500">Detailed insights</div>
+              <div className="font-medium text-gray-900">AI Insights</div>
+              <div className="text-sm text-gray-500">Predictive analytics</div>
             </div>
           </Link>
         </div>
