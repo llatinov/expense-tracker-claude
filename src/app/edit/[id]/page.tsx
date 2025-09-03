@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import { Edit } from 'lucide-react';
 import { useExpenses } from '@/contexts/ExpenseContext';
 import ExpenseForm from '@/components/Forms/ExpenseForm';
-import { ExpenseFormData } from '@/types/expense';
+import { ExpenseFormData, Expense } from '@/types/expense';
 
 interface EditExpensePageProps {
   params: Promise<{
@@ -17,7 +17,7 @@ export default function EditExpensePage({ params }: EditExpensePageProps) {
   const { id } = use(params);
   const router = useRouter();
   const { expenses, updateExpense } = useExpenses();
-  const [expense, setExpense] = useState(null);
+  const [expense, setExpense] = useState<Expense | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -66,7 +66,7 @@ export default function EditExpensePage({ params }: EditExpensePageProps) {
           </div>
           <h2 className="text-xl font-semibold text-gray-900 mb-2">Expense Not Found</h2>
           <p className="text-gray-600 mb-4">
-            The expense you're trying to edit could not be found.
+            The expense you&apos;re trying to edit could not be found.
           </p>
           <button
             onClick={() => router.push('/expenses')}

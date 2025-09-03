@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import { Plus, TrendingUp } from 'lucide-react';
+import { Plus, TrendingUp, Store } from 'lucide-react';
 import SummaryCards from '@/components/Dashboard/SummaryCards';
 import CategoryBreakdown from '@/components/Dashboard/CategoryBreakdown';
 import ExpenseList from '@/components/Expenses/ExpenseList';
@@ -13,7 +13,7 @@ export default function Home() {
         <div>
           <h1 className="text-3xl font-bold text-gray-900">Dashboard</h1>
           <p className="text-gray-600 mt-1">
-            Welcome back! Here's an overview of your expenses.
+            Welcome back! Here&apos;s an overview of your expenses.
           </p>
         </div>
         
@@ -49,7 +49,7 @@ export default function Home() {
       {/* Quick Actions */}
       <div className="bg-white rounded-lg shadow-md p-6">
         <h3 className="text-lg font-semibold text-gray-900 mb-4">Quick Actions</h3>
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           <Link
             href="/add"
             className="flex items-center p-4 bg-blue-50 rounded-lg hover:bg-blue-100 transition-colors"
@@ -80,6 +80,17 @@ export default function Home() {
             <div>
               <div className="font-medium text-gray-900">Analytics</div>
               <div className="text-sm text-gray-500">Detailed insights</div>
+            </div>
+          </Link>
+          
+          <Link
+            href="/top-vendors"
+            className="flex items-center p-4 bg-orange-50 rounded-lg hover:bg-orange-100 transition-colors"
+          >
+            <Store className="w-8 h-8 text-orange-600 mr-3" />
+            <div>
+              <div className="font-medium text-gray-900">Top Vendors</div>
+              <div className="text-sm text-gray-500">Spending by vendor</div>
             </div>
           </Link>
         </div>
