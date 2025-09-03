@@ -66,7 +66,7 @@ export default function EditExpensePage({ params }: EditExpensePageProps) {
           </div>
           <h2 className="text-xl font-semibold text-gray-900 mb-2">Expense Not Found</h2>
           <p className="text-gray-600 mb-4">
-            The expense you're trying to edit could not be found.
+            The expense you&apos;re trying to edit could not be found.
           </p>
           <button
             onClick={() => router.push('/expenses')}
