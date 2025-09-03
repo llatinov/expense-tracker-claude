@@ -17,7 +17,7 @@ export default function SpendingChart({ type = 'pie', height = 300 }: SpendingCh
   const summary = calculateExpenseSummary(expenses);
   
   const chartData = Object.entries(summary.categoryBreakdown)
-    .filter(([_, amount]) => amount > 0)
+    .filter(([, amount]) => amount > 0)
     .map(([category, amount]) => ({
       name: category,
       value: amount,
@@ -41,7 +41,7 @@ export default function SpendingChart({ type = 'pie', height = 300 }: SpendingCh
     );
   }
 
-  const CustomTooltip = ({ active, payload, label }: any) => {
+  const CustomTooltip = ({ active, payload }: { active?: boolean; payload?: Array<{ payload: { name: string }; value: number }> }) => {
     if (active && payload && payload.length) {
       const data = payload[0];
       return (
@@ -73,7 +73,7 @@ export default function SpendingChart({ type = 'pie', height = 300 }: SpendingCh
               cx="50%"
               cy="50%"
               labelLine={false}
-              label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
+              label={({ name, percent }) => `${name} ${percent ? (percent * 100).toFixed(0) : '0'}%`}
               outerRadius={80}
               fill="#8884d8"
               dataKey="value"

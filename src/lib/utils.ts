@@ -125,3 +125,42 @@ export const downloadCSV = (expenses: Expense[], filename: string = 'expenses.cs
     document.body.removeChild(link);
   }
 };
+
+export interface TopCategoryData {
+  category: ExpenseCategory;
+  totalAmount: number;
+  expenseCount: number;
+  percentage: number;
+  avgPerExpense: number;
+}
+
+export const calculateTopCategories = (expenses: Expense[]): TopCategoryData[] => {
+  if (expenses.length === 0) return [];
+
+  const totalSpending = expenses.reduce((sum, expense) => sum + expense.amount, 0);
+  
+  const categoryStats: Record<ExpenseCategory, { total: number; count: number }> = {
+    Food: { total: 0, count: 0 },
+    Transportation: { total: 0, count: 0 },
+    Entertainment: { total: 0, count: 0 },
+    Shopping: { total: 0, count: 0 },
+    Bills: { total: 0, count: 0 },
+    Other: { total: 0, count: 0 }
+  };
+
+  expenses.forEach(expense => {
+    categoryStats[expense.category].total += expense.amount;
+    categoryStats[expense.category].count += 1;
+  });
+
+  return Object.entries(categoryStats)
+    .filter(([, stats]) => stats.total > 0)
+    .map(([category, stats]) => ({
+      category: category as ExpenseCategory,
+      totalAmount: stats.total,
+      expenseCount: stats.count,
+      percentage: (stats.total / totalSpending) * 100,
+      avgPerExpense: stats.total / stats.count
+    }))
+    .sort((a, b) => b.totalAmount - a.totalAmount);
+};
