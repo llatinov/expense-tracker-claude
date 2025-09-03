@@ -3,7 +3,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Home, Plus, List, BarChart3 } from 'lucide-react';
+import { Home, Plus, List, BarChart3, Trophy } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 const navItems = [
@@ -26,6 +26,11 @@ const navItems = [
     href: '/analytics',
     label: 'Analytics',
     icon: BarChart3,
+  },
+  {
+    href: '/top-categories',
+    label: 'Top Categories',
+    icon: Trophy,
   },
 ];
 
